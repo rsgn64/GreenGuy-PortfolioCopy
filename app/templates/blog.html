@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-2">
+    <div class="col-2"></div>
+    <div class="col text-end">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Order by
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{url_for('blog', desc = 1)}}">Newest</a></li>
+              <li><a class="dropdown-item" href="{{url_for('blog', desc = 0)}}">Oldest</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+    {% for post in posts %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col blog_post_item">
+            <a href="{{url_for('blog_post', post_name = post.post_name)}}" class="blog_post_link">
+                <div>
+                    <div class='blog_post_date'>{{post.date.strftime("%b %d, %Y")}}</div>
+                    <h3 class='blog_post_title'>{{post.post_title}}</h3>
+                    <p class='blog_post_desc'>{{post.description}}</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    {% endfor %}
+    <div class="row mb-2">
+        <div class="col-1"></div>
+        <div class="col-5">
+            {% if prev_url %}
+                <a href="{{ prev_url }}">Previous posts</a>
+            {% endif %}
+        </div>
+        <div class="col-5 text-end">
+            {% if next_url %}
+                <a href="{{ next_url }}">More posts</a>
+            {% endif %}
+        </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Add Blog Post</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post_name.label }}<br>
+            {{ form.post_name(size=32) }}
+        </p>
+        <p>
+            {{ form.post_zip_file.label }}<br>
+            {{ form.post_zip_file }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% for error in form.post_name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    <p><b>Reminder</b> - The top of the NoteBook must have:</p>
+    <div>---<br>
+        title: "Title"<br>
+        abstract: "Description goes here"<br>
+        format:<br>
+        &nbsp&nbsp&nbsp&nbsphtml:<br>
+        &nbsp&nbsp&nbsp&nbspcode-copy: true<br>
+        &nbsp&nbsp&nbsp&nbspextract-media: &lt;any folder name&gt;<br>
+        jupyter: python3<br>
+        ---</div>
+    <p>Use 'quarto render &lt;filename&gt;.ipynb --to html' in Jupyter Terminal.</p>
+    <p>Zip the &lt;filename&gt;.html and &lt;extract-media folder&gt; together then upload here.</p>
+{% endblock %}

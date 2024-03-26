@@ -1,0 +1,224 @@
+{
+    "meta": {
+        "theme": "kendall"
+      },
+    "basics": {
+        "name": "Robert Scott Green",
+        "label": "Engineer",
+        "image": "https://avatars.githubusercontent.com/rsgn64",
+        "email": "rsgn64@gmail.com",
+        "phone": "519-630-2007",
+        "url": "https://www.greenguy.me",
+        "summary": "I'm an experienced Mechanical Engineer that has always been passionate about programming/automation. After years of saving my employers from hiring additional engineers with the code I wrote, I've now taken the leap to officially pursue this passion and break into Tech.",
+        "location": {
+        "address": "1189 Vankoughnet Rd",
+        "postalCode": "P1L 1X1",
+        "city": "Bracebridge",
+        "countryCode": "CA",
+        "region": "Ontario"
+      },
+    "profiles": [{
+        "network": "Github",
+        "username": "rsgn64",
+        "url": "https://github.com/rsgn64"
+        },{
+        "network": "LinkedIn",
+        "username": "Robert Green",
+        "url": "https://www.linkedin.com/in/robert-green-8a25037a/"
+        }]
+    },
+    "work": [{
+        "name": "Raytheon ELCAN Optical Technologies",
+        "position": "Opto-mechanical Design Engineer",
+        "url": "https://www.rtx.com/raytheon/what-we-do/elcan",
+        "startDate": "2019-04",
+        "endDate": "2022-08",
+        "summary": "Designed, prototyped, tested, managed, and supervised assembly of areospace and military optical products from craddle to grave.",
+        "highlights": [
+        "Lead the design, build and testing of a multi-waveband modern theodolite.",
+        "Full product RSS tolerance stack analysis and applications using CodeV optical data.",
+        "Professional Autodesk Inventor user utilizing iLogic scripts and parameter driven design to increase design efficiency.",
+        "CAD system administrator & developed company's Design Standards utilizing iLogic to automate and enforce standardization.",
+        "Developed iLogic program to convert optical zoom positional data into accurate parametric models of smoothed barrel CAM paths for rifle sights; improving design time from months to minutes.",
+        "Developed iLogic program to convert CodeV optical designs into native Autodesk Inventor files; setting up tolerances, parameters and key layout data to kick-start the Opto-mechanical design phase."]
+        },{
+        "name": "Magna Closures",
+        "position": "Advanced Manufacturing Engineer",
+        "url": "https://www.magna.com/",
+        "startDate": "2017-08",
+        "endDate": "2019-04",
+        "summary": "Managed and engineered the layout, process, and integration of new assembly/weld equipment into the facility.",
+        "highlights": [
+        "Designed test/weld/assembly fixtures, pre-production prototypes, wire bending cells, racking/conveyor systems, and other R&D components for manufacturing work cells using SolidWorks as primary CAD software.",
+        "Common: RFQ's, PFMEA's, DoE's, Takt-time layouts, robotic weld programming, and hands-on installation of equipment.",
+        "Built a Solidworks VBA program to generate component/product in/out racking systems based on takt-time. Script created full BoM, cut-lengths, and assembly instructions."]
+        },{
+        "name": "Western University",
+        "position": "Limited Duties Instructor",
+        "url": "https://www.eng.uwo.ca/files/undergraduate/first-year/ES-1036.pdf",
+        "startDate": "2017-01",
+        "endDate": "2017-05",
+        "summary": "Primary instructor for two sections (256 students) of ES1036 - Programming Fundamentals for Engineers.",
+        "highlights": [
+        "Partially re-designed the course using modern tools: online generative quizes (upgrade from paper), end of lecture knowledge games, and game-design based assignments.",
+        "Received teacher evaluation score of 83.4%"]
+        },{
+        "name": "Western University",
+        "position": "Graduate Teaching Assistant",
+        "url": "https://www.eng.uwo.ca/mechanical//graduate/index.html",
+        "startDate": "2014-09",
+        "endDate": "2016-10",
+        "summary": "Teaching Assistant for Mechatronics System Design and Introduction to Finite Element Modeling during Master's tenure.",
+        "highlights": [
+        "Recieved Graduate Teaching Assistant Award for Excellence during both years."]
+        },{
+        "name": "Chrysler Group LLC",
+        "position": "Advanced Feature Development Intern",
+        "url": "https://www.chrysler.ca/en",
+        "startDate": "2012-04",
+        "endDate": "2013-09",
+        "summary": "Created mock-ups/prototypes of customer/employee vehicle feature ideas.",
+        "highlights": [
+        "Built department's intranet website.",
+        "Recieved Canadian Manufacturers & Exporters Scholarship."]
+        }
+    ],
+    "volunteer": [{
+        "organization": "Let's Talk Science",
+        "position": "Volunteer",
+        "url": "https://letstalkscience.ca/",
+        "startDate": "2014-09",
+        "endDate": "2016-09",
+        "summary": "Bi-monthly science demonstrations/experiments at St. John Dearness Public School",
+        "highlights": ["Kids would always ask the teacher when I'd be back."]
+        }
+    ],
+    "education": [{
+        "institution": "Western University",
+        "url": "https://www.eng.uwo.ca/mechanical//graduate/index.html",
+        "area": "Mechanical Engineering - Optical Devices",
+        "studyType": "Master's Degree",
+        "startDate": "2014-09",
+        "endDate": "2016-10",
+        "score": "95",
+        "courses": ["Medical applications focus"]
+        },{
+        "institution": "Western University",
+        "url": "https://www.eng.uwo.ca/undergraduate/programs/mechanical.html",
+        "area": "Mechanical Engineering",
+        "studyType": "Bachelor's Degree",
+        "startDate": "2010-09",
+        "endDate": "2014-05",
+        "score": "90",
+        "courses": ["Robotics and design focus"]
+        }
+    ],
+    "awards": [{
+        "title": "Graduate Teaching Assistant for Excellence Award",
+        "date": "2015-11",
+        "awarder": "Western University",
+        "summary": "Awarded to one TA per faculty & voted for by students. Recieved twice in November 2015 & 2016."
+        },{
+        "title": "Canadian Manufacturers & Exporters Scholarship",
+        "date": "2013-10",
+        "awarder": "CME",
+        "summary": "Awarded to a student with strong contribution to their manufacturing internship company."
+        }
+    ],
+    "certificates": [{
+        "name": "Machine Learning Specialization",
+        "date": "2024-01",
+        "issuer": "DeepLearning.ai",
+        "url": "https://www.coursera.org/account/accomplishments/specialization/T98SKRSSSJ5U"
+        },{
+        "name": "Python for Machine Learning & Data Science Masterclass",
+        "date": "2023-11",
+        "issuer": "Udemy",
+        "url": "https://www.udemy.com/certificate/UC-dc1cf90a-4f02-4aae-9202-b5541d0c35f6"
+        },{
+        "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+        "date": "2022-12",
+        "issuer": "Udemy",
+        "url": "https://www.udemy.com/certificate/UC-0ad8690f-31de-4d18-a817-75df01a03e90"
+        }
+    ],
+    "publications": [{
+        "name": "Fabrication of Large Mechanically Flexible Multi-Layered PDMS Optical Devices",
+        "publisher": "Western University",
+        "releaseDate": "2016-11",
+        "url": "https://ir.lib.uwo.ca/etd/4147/",
+        "summary": "MESc Thesis for Optical Devices"
+        }
+    ],
+    "skills": [{
+        "name": "Web Development",
+        "level": "Competent",
+        "keywords": ["HTML5", "CSS3", "JavaScript", "Flask", "SQLAlchemy"]
+        },{
+        "name": "Programming",
+        "level": "Proficient",
+        "keywords": ["Python", "VBA", "C#", "C++"]
+        },{
+        "name": "Computer-Aided Design",
+        "level": "Expert",
+        "keywords": ["SolidWorks", "Autodesk Inventor", "NX"]
+        },{
+        "name": "Product Development & Manufacturing",
+        "level": "Expert",
+        "keywords": ["R&D", "CAM", "CNC", "PFMEA", "DFMEA", "RFQ"]
+        },{
+        "name": "Machine Learning",
+        "level": "Advanced Beginner",
+        "keywords": ["JupyterLab", "Numpy", "Pandas", "Pytorch", "Matplotlib", "Scikit-learn", "RNNs"]
+        }
+    ],
+    "languages": [{
+        "language": "English",
+        "fluency": "Native speaker"
+        }
+    ],
+    "interests": [{
+        "name": "Great Outdoors",
+        "keywords": ["Gardening", "Camping", "Backpacking", "Hiking", "Mountain Biking", "Snowboarding"]
+        },{
+        "name": "Great Indoors",
+        "keywords": ["Fantasy Novels", "Video Games", "Indoor Gardening", "Cooking", "Fermentation", "Tech Hobbies"]
+        }
+    ],
+    "references": [{
+        "name": "",
+        "reference": ""
+        }
+    ],
+    "projects": [{
+        "name": "GreenGuy.me",
+        "startDate": "2024-01",
+        "description": "From-scratch full-stack Blog/CV website using Flask, SQLite3, and Bootstrap with automated elements. This project was an excuse to create a custom web app.",
+        "highlights": ["Lightweight custom design and fully responsive.",
+                        "Curriculum Vitae page is generated using a central JSON data file (stored as a Github Gist and follows the jsonresume.org schema).",
+                        "Blog posts are written in Jupyter Notebooks, converted to html using Quarto, then uploaded to site which modifies sources and extracts metadata to store in SQLite3 database."],
+        "url": "https://greenguy.me"
+    },{
+        "name": "Project Minis",
+        "startDate": "2022-10",
+        "description": "Compilation of random rabbit-hole side projects to display proof of competency.",
+        "highlights": [""],
+        "url": "https://github.com/rsgn64/Minis"
+    },{
+        "name": "iLogic Design Automation",
+        "startDate": "2021-09",
+        "endDate": "2022-05",
+        "description": "Utilized Autodesk Inventor's iLogic (VBA wrapper) to write three key automation programs which ultimately prevented the need to hire two additional designers (Raytheon-owned project)",
+        "highlights": ["Auto-generated drawing templates based on part type and program security/export requirements. Drawing setup time reduction from 10-20min to <1min and elimination of program related errors.",
+                        "Optical Zoom CAM-path generator based on importing data from CodeV. Moved from list of points for manufacturing to perfect parametric model. Design-to-prototype time reduction from 4-6 months to a few days.",
+                        "Native optical CAD design setup. Generated full lens/optical models in Inventor with embeded tolerances, materials, and optical surface requirements imported from CodeV and atuo-translated to ISO10110 drawings. Opto-mechanical CAD design setup reduction from weeks to minutes."]
+    },{
+        "name": "Solidworks Part Conveyor Generator",
+        "startDate": "2017-10",
+        "endDate": "2017-11",
+        "description": "VBA program to generate ingoing/outgoing conveyor rack design based on importing CAD part (to get size/weight) and takt-time requirements. (Magna-owned project)",
+        "highlights": [ "Time to design, order/cut parts, and assemble reduced from weeks to less than a day's work.",
+                        "Removed need for co-op student. Whoops."]
+    }
+    ]
+}

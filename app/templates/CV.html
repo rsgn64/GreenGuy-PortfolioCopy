@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row"> <!-- Display Pic & Bio-Summary-->
+        <div id="dpic" class="col-md-5">
+            {% if use_gist_img %}
+                <img src="{{basics['image']}}" id="mepic"/>
+            {% else %}
+                <img src="{{url_for('static', filename='images/rob.jpg')}}" id="mepic"/>
+            {% endif %}
+        </div>
+        <div id="ddesc" class="col-md-7">
+            <h1 id="name_title">{{ basics['name'] }}</h1>
+            <p id="bio">{{ basics['summary'] }}</p>
+            <div> <!--Add profiles/icons & links to-->
+                {% for profile in basics['profiles'] %}
+                    <a href="{{profile['url']}}"><img src="{{url_for('static', filename='images/')}}{{profile['network']}}.svg" class="icon" /></a>
+                {% endfor %}
+                <!-- Special for email: will reveal on click-->
+                <img src="{{url_for('static', filename='images/gmail.svg')}}" class="icon" style="cursor: pointer;" id="contact" title="Click to reveal" />
+                <p id="simpcode"></p> 
+                <!-- End special for email-->
+            </div>
+        </div>
+    </div>
+    <!-- Add skills -->
+    {% for skillCat in skills %}
+    <div class="row">
+        <div class="col-md-5 skill">
+            <b>{{skillCat['name']}} ({{skillCat['level']}}):</b>
+        </div>
+        <div class="col">
+            {% for skill in skillCat['keywords'] %}
+            <p class="skill">{{skill}}</p>
+            {% endfor %}
+        </div>
+        <div class="col-2"></div>
+    </div>
+    {% endfor %}
+    <div class="cata">Experience</div>
+    <hr class="cv_line">
+    <!-- Manual input for self-taught-->
+    <div class="row justify-content-md-center">
+        <div class="col-1 timespan">Now<br>to<br>Aug 2022</div>
+        <div class="col-auto ico">
+            <div class="entry-dot"></div>
+            <img src="{{url_for('static', filename='images/loss_function.jpg')}}" class="ico"/>
+        </div>
+        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
+            <h6><b>Self-Teaching: Software Engineering, Data Science, & Machine Learning</b></h6>
+            <p class="summ">See Certiciates and Projects below.</p>
+        </div>
+    </div>
+
+    <!-- Add experience timeline -->
+    {% for xp in experience %}
+    <div class="row justify-content-md-center">
+        <div class="col-1 timespan">{{xp['endDate']}}<br>to<br>{{xp['startDate']}}</div>
+        <div class="col-auto ico">
+            <div class="entry-dot"></div>
+            <img src="{{url_for('static', filename='images/')}}{{xp['name'].split(' ')[0]}}.jpg" class="ico"/>
+        </div>
+        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
+            <h6><b>{{xp['position']}}</b> @ <i>{{xp['name']}}</i></h6>
+            <p class="summ">{{xp['summary']}}</p>
+            <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hl_acc_{{loop.index}}" aria-expanded="false" aria-controls="hl_acc_{{loop.index}}">
+                Highlights: <img src="{{url_for('static', filename='images/arrow-up.svg')}}" style="width:17px;"/>
+            </button>
+            <div class="collapse" id="hl_acc_{{loop.index}}">
+                <div class="card card-body">
+                    <ul>
+                        {% for highlight in xp['highlights'] %}
+                        <li class="summ">{{highlight}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>    
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Add Certificate timeline to education timeline-->
+    <div class="cata">Education/Certs</div>
+    <hr class="cv_line">
+    {% for certificate in certs %}
+    <div class="row justify-content-md-center">
+        <div class="col-1 timespan2">{{certificate['date']}}</div>
+        <div class="col-auto ico2">
+            <img src="{{url_for('static', filename='images/certificate.svg')}}" class="degree-dot"/>
+            <img src="{{url_for('static', filename='images/')}}{{certificate['issuer'].split(' ')[0]}}.jpg" class="ico2"/>
+        </div>
+        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
+            <h6><b>{{certificate['name']}}</b> @ <i>{{certificate['issuer']}}</i></h6>
+            <p class="summ">Certificate ID: <a href="{{certificate['url']}}" target="_blank">{{certificate['url'].split('/')[-1]}}</a></p>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Add Education timeline -->
+    {% for education in educ %}
+    <div class="row justify-content-md-center">
+        <div class="col-1 timespan2">{{education['endDate']}}</div>
+        <div class="col-auto ico2">
+            <img src="{{url_for('static', filename='images/degree.svg')}}" class="degree-dot"/>
+            <img src="{{url_for('static', filename='images/')}}{{education['institution'].split(' ')[0]}}.jpg" class="ico2"/>
+        </div>
+        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
+            <h6><b>{{education['studyType']}}</b> @ <i>{{education['institution']}}</i></h6>
+            <p class="summ">{{education['area']}}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Add projects -->
+    <div class="cata">Projects</div>
+    <hr class="cv_line">
+    <div class="container project">
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 col-12">
+                <b>{{project['name']}}</b>
+                {% if project['url'] %}
+                    <a href="{{project['url']}}" target="_blank" class = "project"><img src="{{url_for('static', filename='images/')}}{{project['name']}}.jpg" class = "project"/></a>
+                {% else %}
+                    <img src="{{url_for('static', filename='images/')}}{{project['name']}}.jpg" class = "project"/>
+                {% endif %}
+                <p class="summ">{{project['description']}}</p>
+                {% if project['highlights'] and project['highlights'][0] != "" %}
+                    <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hl_proj_{{loop.index}}" aria-expanded="false" aria-controls="hl_proj_{{loop.index}}">
+                        Highlights: <img src="{{url_for('static', filename='images/arrow-up.svg')}}" style="width:17px;"/>
+                    </button>
+                    <div class="collapse" id="hl_proj_{{loop.index}}">
+                        <div class="card card-body">
+                            <ul>
+                                {% for highlight in project['highlights'] %}
+                                <li class="summ">{{highlight}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Add publications -->
+    <div class="cata">Publications</div>
+    <hr class="cv_line">
+    {% for pub in pubs %}
+    <div class="container pubs">
+        <div class="row justify-content-md-center">
+            <div class="col-2 text-center" id="pub">{{pub['releaseDate']}}</div>
+            <div class="col-10">
+                <a href="{{pub['url']}}" target="_blank" class="pubs">{{pub['name']}}</a>
+                <h4 class="pubs">{{pub['summary']}}</h4>
+                <h5 class="pubs"><b>Published by</b>: {{pub['publisher']}}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- attempt to mask contact from scrappers -->
+<script type="text/javascript">
+    const simpcode = (input) => {
+        const alpha = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq';
+        const digi = '01234567890123456'
+        const spec = '!@?#$%&*())(*&.%$#@!'
+        input = input.replace(/[a-z]/gi, letter => alpha[alpha.indexOf(letter) + 17])
+        input = input.replace(/[0-9]/gi, digit => digi[digi.indexOf(digit) + 7])
+        input = input.replace(/[!@#$%^&*()]/gi, specc => spec[spec.indexOf(specc) + 13])
+        return input;
+    }
+    var e_is_shown = false;
+    document.getElementById('contact').addEventListener("click", function(){
+        let demail = document.getElementById('simpcode');
+        let msg = "abpw97%pvjru@lxv"
+        demail.innerHTML = simpcode(msg);
+        demail.style.opacity = e_is_shown ? 0 : 1;
+        e_is_shown = !e_is_shown;
+    })
+  </script>
+{% endblock %}
