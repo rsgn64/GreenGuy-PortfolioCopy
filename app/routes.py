@@ -1,9 +1,9 @@
 from flask import render_template, url_for, Flask, flash, request, redirect
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import app, db
-from app.models import User, BlogPost, get_json_data, create_blog_post
-from app.forms import AddBlogPostForm, LoginForm
+from app.models import User, BlogPost, get_json_data, create_blog_post, delete_blog_post
+from app.forms import AddBlogPostForm, LoginForm, DelBlogPostForm
 
 @app.route('/')
 def index():
@@ -59,6 +59,8 @@ def blog_post(post_name):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     #Login for 1 account only. Intended for me to easily add new posts
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         if form.username.data == app.config['ADMIN_USERNAME'] and form.password.data == app.config['ADMIN_PASSWORD']:
@@ -75,10 +77,8 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/add_post', methods=['GET', 'POST'])
+@login_required #Require login in to add posts
 def add_post():
-    #Require login to add posts
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
     form = AddBlogPostForm()
     if form.validate_on_submit():
         #Read the uploaded .zip as bytes:
@@ -93,3 +93,15 @@ def add_post():
         return redirect(url_for('blog_post', post_name=form.post_name.data))
 
     return render_template('add_blog_post.html', form=form)
+
+@app.route('/delete_post', methods=['GET', 'POST'])
+@login_required
+def delete_post():
+    form = DelBlogPostForm()
+    if form.validate_on_submit():
+        to_del = form.post_name.data
+        delete_blog_post(to_del)
+        BlogPost.query.filter(BlogPost.post_name == to_del).delete()
+        db.session.commit()
+        flash(f'{to_del} has been deleted.')
+    return render_template('del_blog_post.html', form=form)

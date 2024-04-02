@@ -8,6 +8,7 @@ import json
 import zipfile
 import os
 import io
+import shutil
 from bs4 import BeautifulSoup, Doctype
 
 #flask-login requires User class with an id.
@@ -92,4 +93,7 @@ def create_blog_post(zip_file, post_name):
                 item.filename = item.filename.rsplit('/', 1)[1]
                 zf.extract(item, path=os.path.join(app.config['BLOG_FILES_LOC'], post_name))
     return (post_title, description)
-    
+
+def delete_blog_post(post_name):
+    os.remove(os.path.join(app.config['BLOG_HTML_LOC'], post_name + '.html'))
+    shutil.rmtree(os.path.join(app.config['BLOG_FILES_LOC'], post_name))

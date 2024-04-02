@@ -12,6 +12,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
+login.login_view = 'login'
 
 #Log errors to 10kb file using RotatingFileHandler
 if not app.debug:

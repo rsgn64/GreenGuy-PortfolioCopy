@@ -1,2 +1,2 @@
 FLASK_APP=greenguy.py
-FLASK_DEBUG=False
+FLASK_DEBUG=True
