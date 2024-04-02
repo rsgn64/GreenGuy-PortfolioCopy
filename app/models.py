@@ -85,7 +85,7 @@ def create_blog_post(zip_file, post_name):
                 for img in soup.find_all('img',{"src":True}):
                     img['src'] = "{{url_for('static', filename='blog_post_media/" + post_name + "/" + img['src'].rsplit('/', 1)[1] + "')}}"
                 #Save the output to post_name.html:
-                with open(app.config['BLOG_HTML_LOC'] + "\\" + post_name + '.html', "w", encoding='utf-8') as f:
+                with open(os.path.join(app.config['BLOG_HTML_LOC'], post_name + '.html'), "w", encoding='utf-8') as f:
                     f.write(str(soup))
             else:
                 #Quarto's 'extract-media' option places all media into a named folder, but still has some sub-folder structure to it.
