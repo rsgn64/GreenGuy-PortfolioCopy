@@ -3,12 +3,12 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import app, db
 from app.models import User, BlogPost, get_json_data, create_blog_post, delete_blog_post
-from app.forms import AddBlogPostForm, LoginForm, DelBlogPostForm
+from app.forms import AddBlogPostForm, LoginForm, DelBlogPostForm, ModBlogPostForm
 
 @app.route('/')
 def index():
     #Route to blog portion for now
-    return redirect(url_for('blog'))
+    return redirect(url_for('cv'))
 
 @app.route('/cv')
 def cv():
@@ -21,6 +21,7 @@ def cv():
     certs = cv_data['certificates']
     projects = cv_data['projects']
     pubs = cv_data['publications']
+    interests = cv_data['interests']
     #Covert JSON Schema date formats within Experience, Education, Publications, and Certificates from 2020-04 to Apr 2020
     conv_dict = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr', '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug', '09': 'Sept', '10':'Oct', '11':'Nov', '12':'Dec'}
     for item in experience:
@@ -33,7 +34,7 @@ def cv():
         item['date'] = conv_dict[item['date'][5:7]] + ' ' + item['date'][0:4]
     for item in pubs:
         item['releaseDate'] = conv_dict[item['releaseDate'][5:7]] + ' ' + item['releaseDate'][0:4]
-    return render_template('CV.html', title='CV', basics=basics, skills=skills, experience=experience, educ=educ, certs=certs, projects=projects, pubs=pubs, use_gist_img=use_gist_img)
+    return render_template('CV.html', title='CV', basics=basics, skills=skills, experience=experience, educ=educ, certs=certs, projects=projects, pubs=pubs, use_gist_img=use_gist_img, interests=interests)
 
 @app.route('/blog')
 def blog():
@@ -59,13 +60,12 @@ def blog_post(post_name):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     #Login for 1 account only. Intended for me to easily add new posts
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         if form.username.data == app.config['ADMIN_USERNAME'] and form.password.data == app.config['ADMIN_PASSWORD']:
             login_user(user=User())
-            return redirect(url_for('add_post'))
+            #Can use Flask's session object to store and redirect where users were prompted to login from. But since it's just me: redirect to index.
+            return redirect(url_for('index'))
         else:
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -77,7 +77,7 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/add_post', methods=['GET', 'POST'])
-@login_required #Require login in to add posts
+@login_required
 def add_post():
     form = AddBlogPostForm()
     if form.validate_on_submit():
@@ -105,3 +105,18 @@ def delete_post():
         db.session.commit()
         flash(f'{to_del} has been deleted.')
     return render_template('del_blog_post.html', form=form)
+
+@app.route('/modify_post', methods=['GET', 'POST'])
+@login_required
+def modify_post():
+    #Modify an existing post by deleting old and uploading new. This will keep its ID and Date.
+    form = ModBlogPostForm()
+    if form.validate_on_submit():
+        to_mod = form.post_name.data
+        file_data = form.post_zip_file.data.read()
+        delete_blog_post(to_mod)
+        new_post_title, new_description = create_blog_post(file_data, to_mod)
+        BlogPost.query.filter(BlogPost.post_name == to_mod).update({'post_title': new_post_title, 'description': new_description})
+        db.session.commit()
+        flash(f'{to_mod} has been modified.')
+    return render_template('mod_blog_post.html', form=form)

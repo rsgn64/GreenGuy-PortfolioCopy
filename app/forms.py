@@ -19,10 +19,20 @@ class AddBlogPostForm(FlaskForm):
         post = db.session.scalar(sa.select(BlogPost).where(BlogPost.post_name == post_name.data))
         if post is not None:
             raise ValidationError('A blog post with that Post Name already exists. Please choose a different name.')
-
+        
 class DelBlogPostForm(FlaskForm):
     post_name = StringField('Post Name (for URL)', validators=[DataRequired()])
     submit = SubmitField('Delete Post')
+
+    def validate_post_name(self, post_name):
+        post = db.session.scalar(sa.select(BlogPost).where(BlogPost.post_name == post_name.data))
+        if post is None:
+            raise ValidationError('Blog post name doesn\'t exist!')
+
+class ModBlogPostForm(FlaskForm):
+    post_name = StringField('Post name to modify', validators=[DataRequired()])
+    post_zip_file = FileField('Zip File', validators=[FileRequired()])
+    submit = SubmitField('Modify Post')
 
     def validate_post_name(self, post_name):
         post = db.session.scalar(sa.select(BlogPost).where(BlogPost.post_name == post_name.data))

@@ -24,51 +24,93 @@
             </div>
         </div>
     </div>
-    <!-- Add skills -->
-    {% for skillCat in skills %}
-    <div class="row">
-        <div class="col-md-5 skill">
-            <b>{{skillCat['name']}} ({{skillCat['level']}}):</b>
+    <div class="row justify-content-center">
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-10 col-12">
+                <div class="cata">Skills</div>
+                <hr class="cv_line">
+            </div>
         </div>
-        <div class="col">
-            {% for skill in skillCat['keywords'] %}
-            <p class="skill">{{skill}}</p>
-            {% endfor %}
+        <!-- Add skills -->
+        {% for skillCat in skills %}
+        <div class="row row_skill justify-content-end">
+            <div class="col-lg-2 col-0"></div>
+            <div class="col-lg-5 col-md-5 skill">
+                <b>{{skillCat['name']}} ({{skillCat['level']}}):</b>
+            </div>
+            <div class="col-lg-5 col-md-6">
+                {% for skill in skillCat['keywords'] %}
+                <p class="skill">{{skill}}</p>
+                {% endfor %}
+            </div>
         </div>
-        <div class="col-2"></div>
+        {% endfor %}
     </div>
-    {% endfor %}
-    <div class="cata">Experience</div>
-    <hr class="cv_line">
-    <!-- Manual input for self-taught-->
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-lg-10 col-12">
+                <div class="cata">Interests</div>
+                <hr class="cv_line">
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <!-- Add interests -->
+        {% for interest in interests %}
+        <div class="row">
+            <div class="col-md-3 skill">
+                <b>{{interest['name']}}:</b>
+            </div>
+            <div class="col-md-7">
+                {% for inter in interest['keywords'] %}
+                <p class="skill">{{inter}}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div></div>
+    <div class="row justify-content-center">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 col-12">
+            <div class="cata">Experience</div>
+            <hr class="cv_line">
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+    <!-- Manual input for self-journey -->
     <div class="row justify-content-md-center">
         <div class="col-1 timespan">Now<br>to<br>Aug 2022</div>
         <div class="col-auto ico">
             <div class="entry-dot"></div>
-            <img src="{{url_for('static', filename='images/loss_function.jpg')}}" class="ico"/>
+            <img src="{{url_for('static', filename='images/mind_growth.jpg')}}" class="ico"/>
         </div>
-        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
-            <h6><b>Self-Teaching: Software Engineering, Data Science, & Machine Learning</b></h6>
-            <p class="summ">See Certiciates and Projects below.</p>
+        <div class="col-xxl-7 col-lg-8 col desc">
+            <h6><b>Part-time work while pivoting career</b></h6>
+            <p class="summ"><ul style="font-size: small;">
+                <li>Farm hand at Milmine Farms learning regenerative agriculture and permaculture - spring/fall 2022 - now.</li>
+                <li>Social worker for special needs family member.</li>
+                <li>Gig-work: Data entry, handy-man work, tutoring & more.</li>
+                <li>Continuous study/self-teaching ML/SW/DS via <a href="#certs">online courses</a> and building <a href="#projects">projects</a></li></ul></p>
         </div>
     </div>
 
-    <!-- Add experience timeline -->
-    {% for xp in experience %}
+    <!-- Add experience timeline: Show only latest 3 (note: currently latest 2 + above manual), make rest in a collapse -->
+    {% for xp in experience[:2] %}
     <div class="row justify-content-md-center">
         <div class="col-1 timespan">{{xp['endDate']}}<br>to<br>{{xp['startDate']}}</div>
         <div class="col-auto ico">
             <div class="entry-dot"></div>
             <img src="{{url_for('static', filename='images/')}}{{xp['name'].split(' ')[0]}}.jpg" class="ico"/>
         </div>
-        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
+        <div class="col-xxl-7 col-lg-8 col desc">
             <h6><b>{{xp['position']}}</b> @ <i>{{xp['name']}}</i></h6>
             <p class="summ">{{xp['summary']}}</p>
-            <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hl_acc_{{loop.index}}" aria-expanded="false" aria-controls="hl_acc_{{loop.index}}">
+            <button class="btn btn-primary hl_btn hl_btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hl_acc_{{loop.index}}" aria-expanded="false" aria-controls="hl_acc_{{loop.index}}">
                 Highlights: <img src="{{url_for('static', filename='images/arrow-up.svg')}}" style="width:17px;"/>
             </button>
             <div class="collapse" id="hl_acc_{{loop.index}}">
-                <div class="card card-body">
+                <div class="card card-body hl_card-body">
                     <ul>
                         {% for highlight in xp['highlights'] %}
                         <li class="summ">{{highlight}}</li>
@@ -79,10 +121,54 @@
         </div>
     </div>
     {% endfor %}
+    <div class="row justify-content-md-center" id="exp_btn_div">
+        <div class="col-1 timespan">
+            <button class="btn btn-primary exp_btn exp_btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#more_exp" aria-expanded="false" aria-controls="more_exp">
+                Old <img src="{{url_for('static', filename='images/arrow-up.svg')}}" style="width:13px;"/>
+            </button>
+        </div>
+        <div class="col-auto" id="exp_ico"></div>
+        <div class="col-xxl-7 col-lg-8 col"></div>
+    </div>
+    <div class="collapse" id="more_exp">
+        <div class="card card-body exp_card-body">
+            {% for xp in experience[2:] %}
+            <div class="row justify-content-md-center">
+                <div class="col-1 timespan">{{xp['endDate']}}<br>to<br>{{xp['startDate']}}</div>
+                <div class="col-auto ico">
+                    <div class="entry-dot"></div>
+                    <img src="{{url_for('static', filename='images/')}}{{xp['name'].split(' ')[0]}}.jpg" class="ico"/>
+                </div>
+                <div class="col-xxl-7 col-lg-8 col desc">
+                    <h6><b>{{xp['position']}}</b> @ <i>{{xp['name']}}</i></h6>
+                    <p class="summ">{{xp['summary']}}</p>
+                    <button class="btn btn-primary hl_btn hl_btn-primary  collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hl_acc2_{{loop.index}}" aria-expanded="false" aria-controls="hl_acc2_{{loop.index}}">
+                        Highlights: <img src="{{url_for('static', filename='images/arrow-up.svg')}}" style="width:17px;"/>
+                    </button>
+                    <div class="collapse" id="hl_acc2_{{loop.index}}">
+                        <div class="card card-body hl_card-body">
+                            <ul>
+                                {% for highlight in xp['highlights'] %}
+                                <li class="summ">{{highlight}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
     <!-- Add Certificate timeline to education timeline-->
-    <div class="cata">Education/Certs</div>
-    <hr class="cv_line">
+    <div class="row justify-content-center" id="certs">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 col-12">
+            <div class="cata">Education/Certs</div>
+            <hr class="cv_line">
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
     {% for certificate in certs %}
     <div class="row justify-content-md-center">
         <div class="col-1 timespan2">{{certificate['date']}}</div>
@@ -90,7 +176,7 @@
             <img src="{{url_for('static', filename='images/certificate.svg')}}" class="degree-dot"/>
             <img src="{{url_for('static', filename='images/')}}{{certificate['issuer'].split(' ')[0]}}.jpg" class="ico2"/>
         </div>
-        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
+        <div class="col-xxl-7 col-lg-8 col desc">
             <h6><b>{{certificate['name']}}</b> @ <i>{{certificate['issuer']}}</i></h6>
             <p class="summ">Certificate ID: <a href="{{certificate['url']}}" target="_blank">{{certificate['url'].split('/')[-1]}}</a></p>
         </div>
@@ -105,7 +191,7 @@
             <img src="{{url_for('static', filename='images/degree.svg')}}" class="degree-dot"/>
             <img src="{{url_for('static', filename='images/')}}{{education['institution'].split(' ')[0]}}.jpg" class="ico2"/>
         </div>
-        <div class="col-xxl-7 col-xl-8 col-lg-8 col desc">
+        <div class="col-xxl-7 col-lg-8 col desc">
             <h6><b>{{education['studyType']}}</b> @ <i>{{education['institution']}}</i></h6>
             <p class="summ">{{education['area']}}</p>
         </div>
@@ -113,8 +199,14 @@
     {% endfor %}
 
     <!-- Add projects -->
-    <div class="cata">Projects</div>
-    <hr class="cv_line">
+    <div class="row justify-content-center" id="projects">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 col-12">
+            <div class="cata">Projects</div>
+            <hr class="cv_line">
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
     <div class="container project">
         <div class="row">
             {% for project in projects %}
@@ -127,11 +219,11 @@
                 {% endif %}
                 <p class="summ">{{project['description']}}</p>
                 {% if project['highlights'] and project['highlights'][0] != "" %}
-                    <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hl_proj_{{loop.index}}" aria-expanded="false" aria-controls="hl_proj_{{loop.index}}">
+                    <button class="btn btn-primary hl_btn hl_btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hl_proj_{{loop.index}}" aria-expanded="false" aria-controls="hl_proj_{{loop.index}}">
                         Highlights: <img src="{{url_for('static', filename='images/arrow-up.svg')}}" style="width:17px;"/>
                     </button>
                     <div class="collapse" id="hl_proj_{{loop.index}}">
-                        <div class="card card-body">
+                        <div class="card card-body hl_card-body">
                             <ul>
                                 {% for highlight in project['highlights'] %}
                                 <li class="summ">{{highlight}}</li>
@@ -146,8 +238,14 @@
     </div>
 
     <!-- Add publications -->
-    <div class="cata">Publications</div>
-    <hr class="cv_line">
+    <div class="row justify-content-center">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 col-12">
+            <div class="cata">Publications</div>
+            <hr class="cv_line">
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
     {% for pub in pubs %}
     <div class="container pubs">
         <div class="row justify-content-md-center">
