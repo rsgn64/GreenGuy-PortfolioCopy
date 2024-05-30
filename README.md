@@ -1,6 +1,6 @@
 ### GreenGuy.me
 
-This is a public copy of a full-stack Flask, SQLite3, and Bootstrap website I created as a useful portfolio project which can be seen live at [GreenGuy.me](www.greenguy.me) which has been deployed to a Linux server using Gunicorn and Nginx.
+This is a public copy of a full-stack Flask, SQLite3, and Bootstrap website I created as a useful portfolio project which can be seen live at [GreenGuy.me](https://www.greenguy.me) which has been deployed to a Linux server using Gunicorn and Nginx.
 
 This website has a CV page which is generated using data stored in [JSON resume schema and hosted as a gist](https://gist.github.com/rsgn64/47c0a6ef15ba65847295a7626e6dbeed) which allows me to keep all my resume/CV information in a single data file.
 
